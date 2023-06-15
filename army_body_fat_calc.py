@@ -1,13 +1,9 @@
 # Army body fat; one touch tape test
 def body_fat_men(waist, weight):
-    first_step = (0.12 * weight)
-    second_step = (1.99 * waist)
-    return  (-26.97 - first_step) + second_step
+    return (-26.97 - (0.12 * weight) + (1.99 * waist))
 
 def body_fat_female(waist, weight):
-    first_step = (0.015 * weight)
-    second_step = (1.27 * waist)
-    return  (-9.15 - first_step) + second_step
+    return (-9.15 - (0.015 * weight) + (1.27 * waist))
 
 print('Welcome to the new Army Body Fat Calculator')
 gender = input('Are you a male or a female? ')
