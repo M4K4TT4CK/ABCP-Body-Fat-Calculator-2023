@@ -2,6 +2,13 @@ import tkinter as tk
 import tkinter.font as tkFont
 from PIL import ImageTk, Image
 
+# Army body fat; one touch tape test
+def body_fat_men(waist, weight):
+    return (-26.97 - (0.12 * weight) + (1.99 * waist))
+
+def body_fat_female(waist, weight):
+    return (-9.15 - (0.015 * weight) + (1.27 * waist))
+
 
 class App:
     def __init__(self, root):
@@ -26,37 +33,35 @@ class App:
         GLabel_914.place(x=10, y=10, width=120, height=101)
 
         # male radio button
-        GRadio_682 = tk.Radiobutton(root)
+        self.gender = tk.StringVar()
+        GRadio_682 = tk.Radiobutton(root, variable=self.gender, value="male")
         ft = tkFont.Font(family='Arial', size=10)
         GRadio_682["font"] = ft
         GRadio_682["fg"] = "#fad400"
         GRadio_682["justify"] = "center"
         GRadio_682["text"] = " Male"
         GRadio_682.place(x=220, y=60, width=85, height=25)
-        GRadio_682["value"] = "male"
         GRadio_682["command"] = self.GRadio_682_command
 
         # female radio button
-        GRadio_467 = tk.Radiobutton(root)
+        GRadio_467 = tk.Radiobutton(root, variable=self.gender, value="female")
         ft = tkFont.Font(family='Arial', size=10)
         GRadio_467["font"] = ft
         GRadio_467["fg"] = "#fad400"
         GRadio_467["justify"] = "center"
         GRadio_467["text"] = "Female"
         GRadio_467.place(x=310, y=60, width=85, height=25)
-        GRadio_467["value"] = "female"
         GRadio_467["command"] = self.GRadio_467_command
 
         # inches entry box
-        GLineEdit_297 = tk.Entry(root)
-        GLineEdit_297["bg"] = "#ffffff"
-        GLineEdit_297["borderwidth"] = "1px"
+        self.waist_entry = tk.Entry(root)
+        self.waist_entry["bg"] = "#ffffff"
+        self.waist_entry["borderwidth"] = "1px"
         ft = tkFont.Font(family='Arial', size=10)
-        GLineEdit_297["font"] = ft
-        GLineEdit_297["fg"] = "#000000"
-        GLineEdit_297["justify"] = "center"
-        GLineEdit_297["text"] = "in"
-        GLineEdit_297.place(x=310, y=90, width=160, height=30)
+        self.waist_entry["font"] = ft
+        self.waist_entry["fg"] = "#000000"
+        self.waist_entry["justify"] = "center"
+        self.waist_entry.place(x=310, y=90, width=160, height=30)
 
         # waist size label
         GLabel_576 = tk.Label(root)
@@ -77,26 +82,24 @@ class App:
         GLabel_433.place(x=160, y=130, width=135, height=30)
 
         # pounds entry box
-        GLineEdit_576 = tk.Entry(root)
-        GLineEdit_576["bg"] = "#ffffff"
-        GLineEdit_576["borderwidth"] = "1px"
+        self.weight_entry = tk.Entry(root)
+        self.weight_entry["bg"] = "#ffffff"
+        self.weight_entry["borderwidth"] = "1px"
         ft = tkFont.Font(family='Arial', size=10)
-        GLineEdit_576["font"] = ft
-        GLineEdit_576["fg"] = "#000000"
-        GLineEdit_576["justify"] = "center"
-        GLineEdit_576["text"] = "lbs"
-        GLineEdit_576.place(x=310, y=130, width=160, height=30)
+        self.weight_entry["font"] = ft
+        self.weight_entry["fg"] = "#000000"
+        self.weight_entry["justify"] = "center"
+        self.weight_entry.place(x=310, y=130, width=160, height=30)
 
         # output percentage
-        GLineEdit_970 = tk.Entry(root)
-        GLineEdit_970["bg"] = "#ffffff"
-        GLineEdit_970["borderwidth"] = "1px"
+        self.bodyfat_output = tk.Entry(root)
+        self.bodyfat_output["bg"] = "#ffffff"
+        self.bodyfat_output["borderwidth"] = "1px"
         ft = tkFont.Font(family='Arial', size=10)
-        GLineEdit_970["font"] = ft
-        GLineEdit_970["fg"] = "#333333"
-        GLineEdit_970["justify"] = "center"
-        GLineEdit_970["text"] = "%"
-        GLineEdit_970.place(x=310, y=210, width=160, height=30)
+        self.bodyfat_output["font"] = ft
+        self.bodyfat_output["fg"] = "#333333"
+        self.bodyfat_output["justify"] = "center"
+        self.bodyfat_output.place(x=310, y=210, width=160, height=30)
 
         # body fat label
         GLabel_121 = tk.Label(root)
@@ -118,6 +121,7 @@ class App:
         GButton_252["relief"] = "raised"
         GButton_252.place(x=260, y=170, width=91, height=30)
         GButton_252["command"] = self.GButton_252_command
+
         # m/f label
         GLabel_850 = tk.Label(root)
         ft = tkFont.Font(family='Arial', size=10)
@@ -128,13 +132,25 @@ class App:
         GLabel_850.place(x=180, y=20, width=256, height=30)
 
     def GRadio_682_command(self):
-        print("command")
+        self.gender = "male"
 
     def GRadio_467_command(self):
-        print("command")
+        self.gender = "female"
 
     def GButton_252_command(self):
-        print("command")
+        waist = int(self.waist_entry.get())
+        weight = int(self.weight_entry.get())
+
+        if self.gender == "male":
+            bodyfat = body_fat_men(waist, weight)
+        elif self.gender == "female":
+            bodyfat = body_fat_female(waist, weight)
+        else:
+            bodyfat = None
+
+        if bodyfat is not None:
+            self.bodyfat_output.delete(0, tk.END)
+            self.bodyfat_output.insert(0, f"{bodyfat:.2f}%")
 
 
 if __name__ == "__main__":
