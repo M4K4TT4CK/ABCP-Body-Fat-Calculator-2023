@@ -2,12 +2,14 @@ import tkinter as tk
 import tkinter.font as tkFont
 from PIL import ImageTk, Image
 
+
 # Army body fat; one touch tape test
 def body_fat_men(waist, weight):
-    return (-26.97 - (0.12 * weight) + (1.99 * waist))
+    return -26.97 - (0.12 * weight) + (1.99 * waist)
+
 
 def body_fat_female(waist, weight):
-    return (-9.15 - (0.015 * weight) + (1.27 * waist))
+    return -9.15 - (0.015 * weight) + (1.27 * waist)
 
 
 class App:
@@ -25,7 +27,7 @@ class App:
         root.resizable(width=False, height=False)
 
         # army logo
-        image = Image.open("logo.png")  # Replace "army_logo.png" with the actual image path
+        image = Image.open("images/logo.png")  # Replace "army_logo.png" with the actual image path
         image = image.resize((120, 101))  # Adjust the image size as needed
         self.photo = ImageTk.PhotoImage(image)
 
