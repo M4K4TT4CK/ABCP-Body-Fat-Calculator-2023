@@ -4,8 +4,7 @@ DTG: R 121700Z JUN 23
 Subject: Notice of new Army Body Fat Assessment for ABCP
 
 I wrote this about an hour after the Army published the above listed 
-ALARACT. Unfotunatly, you cannot run this on certain computers. However, 
-it could be useful to run from replit on your phone or dropped into a 
-JAVAFX or webapp. 
+ALARACT. There are two versions of the software. One is a standalone terminal app and the other 
+is one with a GUI. I plan on adding a third file for exe. 
 
 Whatever it was for fun!
