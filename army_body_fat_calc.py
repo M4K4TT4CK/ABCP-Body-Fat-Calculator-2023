@@ -5,6 +5,7 @@ def body_fat_men(waist, weight):
 def body_fat_female(waist, weight):
     return (-9.15 - (0.015 * weight) + (1.27 * waist))
 
+
 print('Welcome to the new Army Body Fat Calculator')
 gender = input('Are you a male or a female? ')
 if gender == 'male'.lower():
