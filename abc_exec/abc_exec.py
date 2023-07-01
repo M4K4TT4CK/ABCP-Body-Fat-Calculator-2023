@@ -27,7 +27,7 @@ class App:
         root.resizable(width=False, height=False)
 
         # army logo
-        image = Image.open("images/logo.png")  # Replace "army_logo.png" with the actual image path
+        image = Image.open("logo.png")  # Replace "army_logo.png" with the actual image path
         image = image.resize((120, 101))  # Adjust the image size as needed
         self.photo = ImageTk.PhotoImage(image)
 
