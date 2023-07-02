@@ -1,7 +1,7 @@
 IAW ALARACT 046/2023
 DTG: R 121700Z JUN 23
 
-1. abcp_gui.py is the file to run for command line for gui interface
+1. abcp_gui.py is the file to run for command line for tkinter gui interface
 2. abcp_cmd_line.py is command line only
 3. abc_exec is MacOs executable. Still working through some bugs with pyinstaller
 4. web_app is built on the django framework....still working on this
